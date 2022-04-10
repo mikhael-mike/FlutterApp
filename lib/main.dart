@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:quizapp/home.dart';
 import 'package:quizapp/model/question.dart';
 import 'package:quizapp/parsing_json/json_parsing.dart';
+import 'package:quizapp/parsing_json/json_parsing_map.dart';
 
 void main() => runApp(new MaterialApp(
-  home: JsonParsingSimple(),
+  home: JsonParsingMap(),
 ));
 
 
