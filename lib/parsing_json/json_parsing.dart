@@ -38,7 +38,7 @@ class _JsonParsingSimpleState extends State<JsonParsingSimple> {
           builder: (context, AsyncSnapshot<dynamic> snapshot) {
             if(snapshot.hasData){
               // info about price
-              return Text(snapshot.data[0]['title']);
+              return Text(snapshot.data?[0]['title']);
             }
             return CircularProgressIndicator();
           },
@@ -50,7 +50,7 @@ class _JsonParsingSimpleState extends State<JsonParsingSimple> {
 
   Future getData() async {
     var data;
-    String url = 'https://dummyjson.com/products';
+    String url = 'https://jsonplaceholder.typicode.com/posts';
     Network network = Network(url);
 
     data = network.fetchData();
@@ -75,7 +75,7 @@ class Network {
     if(response.statusCode == 200) {
       // print(response.body);
       print('Link true');
-      return json.encode(response.body);
+      return jsonDecode(response.body);
     } else {
       print(response.statusCode);
     }
