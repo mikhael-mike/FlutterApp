@@ -72,9 +72,10 @@ class _JsonParsingSimpleState extends State<JsonParsingSimple> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Divider(height: 5.0,),
              ListTile(
                title: Text('${data[index]['title']}'),
-               subtitle: Text('${data[index]['id']}'),
+               subtitle: Text('${data[index]['body']}'),
                leading: Column(
                  children: <Widget>[
                    CircleAvatar(
