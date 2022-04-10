@@ -32,16 +32,19 @@ class _JsonParsingSimpleState extends State<JsonParsingSimple> {
       appBar: AppBar(
         title: Text('Parsing Json'),
       ),
-      body: Container(
-        child: FutureBuilder(
-          future: getData(),
-          builder: (context, AsyncSnapshot<dynamic> snapshot) {
-            if(snapshot.hasData){
-              // info about price
-              return Text(snapshot.data?[0]['title']);
-            }
-            return CircularProgressIndicator();
-          },
+      body: Center(
+        child: Container(
+          child: FutureBuilder(
+            future: getData(),
+            builder: (context, AsyncSnapshot<dynamic> snapshot) {
+              if(snapshot.hasData){
+                // info about price
+                // return Text(snapshot.data[0]['userId'].toString());
+                return createListView(snapshot.data, context);
+              }
+              return CircularProgressIndicator();
+            },
+          ),
         ),
       ),
       
@@ -60,6 +63,33 @@ class _JsonParsingSimpleState extends State<JsonParsingSimple> {
     // print(data);
     return data;
   }
+
+  Widget createListView(data, BuildContext context) {
+    return Container(
+      child: ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+             ListTile(
+               title: Text('${data[index]['title']}'),
+               subtitle: Text('${data[index]['id']}'),
+               leading: Column(
+                 children: <Widget>[
+                   CircleAvatar(
+                     backgroundColor: Colors.black38,
+                     radius: 23,
+                     child: Text('${data[index]['userId']}'),
+                   )
+                 ],
+               ),
+             )
+          ],
+        );
+      }),
+    );
+  }
 }
 
 class Network {
@@ -75,7 +105,7 @@ class Network {
     if(response.statusCode == 200) {
       // print(response.body);
       print('Link true');
-      return jsonDecode(response.body);
+      return json.decode(response.body);
     } else {
       print(response.statusCode);
     }
