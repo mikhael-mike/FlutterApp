@@ -6,7 +6,7 @@ class PostList {
   PostList({required this.posts});
 
   factory PostList.fromJson(List<dynamic> parsedJson) {
-    List<Post> posts = List<Post>();
+    List<Post> posts = [];
     posts = parsedJson.map((i) => Post.fromJson(i)).toList();
     return new PostList(posts: posts);
   } 
